@@ -4,7 +4,9 @@ import "./hero.scss";
 const Hero = () => {
   return (
     <>
-      <header>Hero area</header>
+      <header className="hero-container">
+        <section className="hero-section container"></section>
+      </header>
     </>
   );
 };

@@ -15,7 +15,15 @@ const NotFound = () => {
   };
 
   return (
-    <div id="notfound">
+    <div
+      id="notfound"
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "100vh",
+      }}
+    >
       <div className="notfound">
         <div className="notfound-404">
           <h1>Oops!</h1>

@@ -15,10 +15,32 @@
     text-shadow: 5px 6px 6px green;
 }
 .container kbd{
-    font-size: 20px;
+    font-size: 30px;
     color: green;
-    padding: 5px;
+    padding: 0px;
     text-align:right;
-    margin-left: 150px;
+    margin-left: 160px;
     
+}
+
+/* try fixing the responsiveness */
+@media screen and(max-width:300px){
+    *{
+        display: block;
+        font-size: 20px;
+        padding: 2px;
+        box-sizing:border-box ;
+    }
+    .container{
+        max-width: 200px;
+        text-align: center;
+        align-items:center;
+
+        display: block;
+    }
+    span{
+        position: relative;
+        display: block;
+        color: rebeccapurple;
+    }
 }

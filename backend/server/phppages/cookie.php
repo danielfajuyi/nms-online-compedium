@@ -1,7 +1,7 @@
 <?php
 # cookies
 $d= strtotime("now");
-$datestaamp = date("y/m/d:h:l:sa",$d);
+$datestaamp = date("y/M/d:h:m:sa",$d);
 $cookie_name = "userdata";
 $cookie_value = array(   array(
     "name" => $username, "lastseen" => $datestaamp

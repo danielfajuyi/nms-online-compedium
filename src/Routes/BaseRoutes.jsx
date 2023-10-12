@@ -7,7 +7,7 @@ import Navbar from "../Components/Navbar/Navbar";
 import NotFound from "../Pages/NotFound/notfound";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import LandingPage from "../Pages/LandingPage/LandingPage";
-import SignupSection from "../Pages/LoginSignup/Signup/Signup";
+import RegisterFORM from "../Pages/LoginSignup/Signup/Signup";
 import LoginSection from "../Pages/LoginSignup/Login/Login";
 
 export const BaseRoutes = () => {
@@ -61,7 +61,7 @@ export const BaseRoutes = () => {
 
     {
       path: "signup",
-      element: <SignupSection />,
+      element: <RegisterFORM/>,
     },
   ]);
 

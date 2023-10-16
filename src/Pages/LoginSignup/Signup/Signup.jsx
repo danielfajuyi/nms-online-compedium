@@ -6,21 +6,18 @@ import axios from  "axios";
 
 
    
-const RegisterForm = ({data}) => {
+const RegisterForm = () => {
+    const [res, setres] = useState('');
+    const [showres, setshowres] = useState(false);
+
     const [user, setUser]  = useState('');
     const [fullname, setFullname]  = useState('');
     const [mobile, setMobile ]  = useState('');
     const [password, setPassword]  = useState('');
     const [email, setEmail]  = useState('');
+  
     
-
-
-
-
-
-
-
-    const handleSubmit = (e) => {
+    const handleSubmit =  (e) => {
         e.preventDefault();
         // Send a POST request to the server to handle user registration
     const url = "http://localhost/fetch.php";
@@ -30,23 +27,30 @@ const RegisterForm = ({data}) => {
     fData.append('mobile', mobile );
     fData.append('password', password ); 
     fData.append('email', email );
-    axios.post(url, fData)
-    //handle response from server
-    .then(Response=>{
-        const {data} = Response.data
-        document.getElementById('fullname').innerHTML = {data} + Date();
-       alert(Response.data)
-    })
+
+
+  axios.post(url,fData)
+   .then((Response) => {
+            setres(Response.data);
+            setshowres('true');
+        })
+    .catch((error)=>{
+        console.error("registration error:", error);
+        setres('A server error has occured');
+        setshowres(true);
+    });
+
+}   
+    
         
 
 
-
-    .catch(error=>{ console.log(error)});
     
+     
 
 
       
-    };
+    
 
     return (
         <div className="sicontainer">
@@ -119,11 +123,24 @@ const RegisterForm = ({data}) => {
                 </div>
                 <button type="submit">Register</button>
             </form>
-        </div>
-    );
-};
+            {showres && (
+                <div className="popup">
 
+<p>{res}</p>
+<button onClick={()=>setshowres(false)}>Close</button>
+                </div>
+
+            )
+
+            }
+            </div>
+
+            
+           ); 
+        }
+
+           
 export default RegisterForm;
 
 
-  
+        

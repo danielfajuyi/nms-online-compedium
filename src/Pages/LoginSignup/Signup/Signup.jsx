@@ -19,6 +19,14 @@ const RegisterForm = () => {
     
     const handleSubmit =  (e) => {
         e.preventDefault();
+
+        //cleint side Authentication
+
+
+
+
+
+
         // Send a POST request to the server to handle user registration
     const url = "http://localhost/fetch.php";
     let fData = new FormData();
@@ -30,10 +38,12 @@ const RegisterForm = () => {
 
 
   axios.post(url,fData)
+  //handle response
    .then((Response) => {
             setres(Response.data);
             setshowres('true');
         })
+        //handle server error 
     .catch((error)=>{
         console.error("registration error:", error);
         setres('A server error has occured');

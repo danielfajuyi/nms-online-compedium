@@ -8,9 +8,10 @@ header('Access-Control-Allow-Origin: *');
     $email = $_POST['email'];
     $fullname =$_POST['fullname'];
     $mobile =$_POST['mobile'];
-    $times_stamp = date("y/m/d:h:m:l:sa");
+    $times_stamp = date("y/m/d:h:M:s:");
+    $otp = uniqid('NMScomp');
 
-   $query = " INSERT INTO `registerd_candidates`( `fullname`, `user`, `password`, `mobile`, `email`, `reg_date`, `subscribed`, `subscription_type`) VALUES ('$fullname','$user','$password','$mobile','$email','$times_stamp','false',' NILL')";
+   $query = " INSERT INTO `registerd_candidates`( `fullname`, `user`, `password`, `mobile`, `email`, `reg_date`, `subscribed`, `subscription_type`,`verification`, `verification_code`) VALUES ('$fullname','$user','$password','$mobile','$email','$times_stamp','false','NULL', 'false', '$otp')";
     ##$result=mysqli_query($conn,$query);
 ##AUTHERNTICATION
     $authenticate_email =  "SELECT * FROM `registerd_candidates` WHERE `email` = '$email'";
@@ -39,6 +40,14 @@ header('Access-Control-Allow-Origin: *');
         echo "username already taken";
 
     }
-   
+   else{
+    mysqli_query($conn,$query);
+require "login-system-main/email.php";
+
+
+echo " confirmation email was sent";
+
+
+   }
     
 ?>

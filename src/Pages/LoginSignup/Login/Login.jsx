@@ -32,7 +32,7 @@ catch (error){
     <>
 
       
-        <form>
+       /* <form>
           <div>
                     <label>Email:</label>
                     <input
@@ -60,7 +60,7 @@ catch (error){
                         required
                     />
                     </div>
-                    </form>
+                    </form>*/
                 
 
                 

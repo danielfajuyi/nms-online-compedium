@@ -10,7 +10,7 @@ import LandingPage from "../Pages/LandingPage/LandingPage";
 import SignupSection from "../Pages/LoginSignup/Signup/Signup";
 import LoginSection from "../Pages/LoginSignup/Login/Login";
 
-import LoginSignup from "../Pages/Signup2/Login/Login"
+//import LoginSignup from "../Pages/Signup2/Login/Login"
 
 export const BaseRoutes = () => {
   const [showNavbar, setShowNavbar] = useState(true);
@@ -63,7 +63,7 @@ export const BaseRoutes = () => {
 
     {
       path: "signup",
-      element: <LoginSignup />,
+      element: <SignupSection />,
     },
   ]);
 

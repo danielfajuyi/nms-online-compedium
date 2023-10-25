@@ -1,5 +1,5 @@
 import React from "react";
-import "./signup.css";
+
 import { useState } from "react";
 import axios from "axios";
 const RegisterForm = ({ data }) => {

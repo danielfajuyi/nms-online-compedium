@@ -11,6 +11,30 @@
     top: 50px;
 
 }
+.popup{
+    position: fixed;
+    left: 70%;
+    top: 50%;
+    transform: translate(-50% ,-50%);
+border: 1px solid green;
+    padding: 10px;
+    text-overflow: 2px;
+    border: 2px ridge green;
+    border-radius: 10px;
+    max-width: 900px;
+   max-height: 700px; 
+   
+}
+.popup p {
+    margin: 0;
+}
+.popup button{
+    background-color: green;
+    color:white;
+    margin-top: 10px;
+    padding: 5px 10px;
+}
+
 *{
     text-align: center;
 }

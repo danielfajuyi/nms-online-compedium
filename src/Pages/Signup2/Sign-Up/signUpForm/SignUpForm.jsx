@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import { AlertModal } from "./Modal";
 import { ToastContainer } from "react-toastify";
 import { FaSun, FaMoon, FaTimes, FaHome } from "react-icons/fa";
@@ -7,10 +7,20 @@ import SignUpInput from "./FormInputs";
 import "react-toastify/dist/ReactToastify.css";
 import "./SignUpForm.css";
 import "./SignUpForm.scss";
+import axios from "axios"
 
 const SignUpForm = ({ activeSignup, setActiveSignup, userRole }) => {
   const [modalTxt, setModalTxt] = useState("");
-  const [inputs, setInputs] = useState({});
+  const [inputs, setInputs] = useState({
+
+ 
+firstName : " ",
+lastName:" " ,
+mobileNo:" ",
+password:" ",
+email:" ",
+
+});
   const [isChecked, setIschecked] = useState(false);
   const [isError, setIsError] = useState(false);
   const [message, setMessage] = useState("");
@@ -73,6 +83,7 @@ const SignUpForm = ({ activeSignup, setActiveSignup, userRole }) => {
 
   // handles onchange on forms inouts
   const handleChange = (e) => {
+
     e.preventDefault();
     setInputs((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
@@ -82,6 +93,38 @@ const SignUpForm = ({ activeSignup, setActiveSignup, userRole }) => {
   //submit form and creating account
   const handleCreateAccount = (e) => {
     e.preventDefault();
+  
+ const url = "http://localhost/fetch.php";
+ const data = new FormData;
+ data.append('firstName',inputs.firstName);
+ data.append('lastName',inputs.lastName);
+ data.append('password',inputs.password);
+ data.append('email',inputs.email);
+ data.append('mobile',inputs.mobileNo);
+ alert(`An authentication code will be sent to ${inputs.email}  `) ;
+//send data to PHP seever to handle registration
+  axios.post(url,data)
+  //handle response
+   .then((Response) => {
+    alert(Response.data);
+    
+    window.location.href = ` http://localhost/login-system-main/verification.php?email=${inputs.email}`;
+
+       })
+        //handle server error 
+    .catch((error)=>{
+        console.error("registration error:", error);
+        alert('A sever error has occured');
+       
+        //stop code from executing if an error occur
+        return;
+        throw error;
+
+       
+    });
+   // redirect user to authentication page
+    
+
   };
 
   // handles progress state
@@ -343,6 +386,7 @@ const SignUpForm = ({ activeSignup, setActiveSignup, userRole }) => {
                           handleChange={handleChange}
                           error={error.fNameErr}
                           className=""
+                          name="firstName"
                         />
 
                         <SignUpInput
@@ -353,6 +397,7 @@ const SignUpForm = ({ activeSignup, setActiveSignup, userRole }) => {
                           handleChange={handleChange}
                           error={error.lNameErr}
                           className=""
+                          name="lastName"
                         />
                       </div>
 
@@ -364,6 +409,7 @@ const SignUpForm = ({ activeSignup, setActiveSignup, userRole }) => {
                         handleChange={handleChange}
                         error={error.emailErr}
                         className=""
+                        name="email"
                       />
                       <div className="form-input-column">
                         <SignUpInput
@@ -374,6 +420,7 @@ const SignUpForm = ({ activeSignup, setActiveSignup, userRole }) => {
                           handleChange={handleChange}
                           error={error.passErr}
                           className=""
+                          name="password"
                         />
 
                         <SignUpInput
@@ -396,6 +443,7 @@ const SignUpForm = ({ activeSignup, setActiveSignup, userRole }) => {
                           handleChange={handleChange}
                           error={error.mobileErr}
                           className=""
+                          name="mobileNo"
                         />
 
                         <SignUpInput

@@ -42,7 +42,7 @@ const RegisterForm = () => {
    .then((Response) => {
             setres(Response.data);
             setshowres('true');
-        })
+       })
         //handle server error 
     .catch((error)=>{
         console.error("registration error:", error);

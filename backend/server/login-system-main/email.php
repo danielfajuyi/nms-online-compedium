@@ -1,12 +1,8 @@
-<style>
 
-   
-</style>
 
 
 <?php
-session_start();
-$_SESSION['email'] = $email;
+
 
 
 require "Mail/phpmailer/PHPMailerAutoload.php";
@@ -15,9 +11,9 @@ require "Mail/phpmailer/PHPMailerAutoload.php";
     
                     $mail->isSMTP();
                     $mail->Host='smtp.gmail.com';
-                    $mail->Port=587;
+                    $mail->Port=465;
                     $mail->SMTPAuth=true;
-                    $mail->SMTPSecure='tls';
+                    $mail->SMTPSecure='ssl';
                    
     
                     $mail->Username='nmsonlinecompedium@gmail.com';
@@ -40,7 +36,8 @@ require "Mail/phpmailer/PHPMailerAutoload.php";
                     border:2px ridge green;
                     border-radius:10px;
                     background:black;
-                    margin-top: 50px;'>
+                    margin-top: 50px;
+                    color:white;'>
                     <img style='  width: 30px;
                     height: 30px;
                     border-radius:50%;
@@ -55,24 +52,24 @@ require "Mail/phpmailer/PHPMailerAutoload.php";
                     
                     </h3>
                     <br><br>
-                    <p>With regrads,</p>"
-                   ;
+                    <p>With regrads,</p>";
+                   
                     
-    
+                   
                             if(!$mail->send()){
-                                ?>
-                                    <script>
-                                        alert("<?php echo "Register Failed, Invalid Email "?>");
-                                    </script>
-                                <?php
-                            }else{
-                                ?>
-                                  <?php echo "Register Successfully, Authenntication code was  sent to " . $email. 'PLEASE!! check your email';?>
-                                <script>
+                                
+                                    #if email was not sent 
+                      echo "Register Failed, Authentication email could not be sent.. TRY using a different network connecction provider. Go back and try again";
+                                
+                                
+                            }else{  ##if email is sent register the user
+
+                                mysqli_query($conn,$query);
+                                
+                                
+                             echo "Register Successfully, Authenntication code was  sent to " . $email . 'PLEASE!! check your email';
+                                
                                   
-                                    window.location.replace('verification.php');
-                                </script>
-                                <?php
                             }
         
 

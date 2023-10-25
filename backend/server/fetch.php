@@ -1,17 +1,20 @@
 <?php
+session_start();
 require "./phppages/dbconnect.php";
 
 header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: *');
 
-    $user = $_POST['user'];
+    #$user = $_POST['user'];
     $password = $_POST['password'];
     $email = $_POST['email'];
-    $fullname =$_POST['fullname'];
+    $fullname =$_POST['firstName'].' '.$_POST['lastName'];
     $mobile =$_POST['mobile'];
-    $times_stamp = date("y/m/d:h:M:s:");
+    $times_stamp = strtotime("now");
     $otp = uniqid('NMScomp');
 
-   $query = " INSERT INTO `registerd_candidates`( `fullname`, `user`, `password`, `mobile`, `email`, `reg_date`, `subscribed`, `subscription_type`,`verification`, `verification_code`) VALUES ('$fullname','$user','$password','$mobile','$email','$times_stamp','false','NULL', 'false', '$otp')";
+
+   $query = " INSERT INTO `registerd_candidates`( `fullname`,  `password`, `mobile`, `email`, `reg_date`, `subscribed`, `subscription_type`,`verification`, `verification_code`) VALUES ('$fullname','$password','$mobile','$email','$times_stamp','false','NULL', 'false', '$otp')";
     ##$result=mysqli_query($conn,$query);
 ##AUTHERNTICATION
     $authenticate_email =  "SELECT * FROM `registerd_candidates` WHERE `email` = '$email'";
@@ -41,12 +44,9 @@ header('Access-Control-Allow-Origin: *');
 
     }
    else{
-    mysqli_query($conn,$query);
+   
 require "login-system-main/email.php";
-
-
-echo " confirmation email was sent";
-
+##header('location: localhost/login-system-main/verification.php');
 
    }
     

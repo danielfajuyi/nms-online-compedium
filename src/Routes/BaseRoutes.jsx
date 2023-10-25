@@ -7,10 +7,9 @@ import Navbar from "../Components/Navbar/Navbar";
 import NotFound from "../Pages/NotFound/notfound";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import LandingPage from "../Pages/LandingPage/LandingPage";
-import SignupSection from "../Pages/LoginSignup/Signup/Signup";
-import LoginSection from "../Pages/LoginSignup/Login/Login";
-
-import LoginSignup from "../Pages/Signup2/Login/Login"
+import LoginSignup from "../Pages/Signup2/Login/Login";
+import RegisterForm from "../Pages/LoginSignup/Signup/Signup";
+import LoginSection from "../Pages/LoginSignup/Login/login2";
 
 export const BaseRoutes = () => {
   const [showNavbar, setShowNavbar] = useState(true);
@@ -55,15 +54,27 @@ export const BaseRoutes = () => {
         },
       ],
     },
-
+    /* Login and signup from daniel branch */
     {
       path: "login",
-      element: <LoginSection />,
+      element: <LoginSignup />,
     },
 
     {
       path: "signup",
       element: <LoginSignup />,
+    },
+
+    /* Login and signup from sirabdull branch */
+
+    {
+      path: "login2",
+      element: <LoginSection />,
+    },
+
+    {
+      path: "signup2",
+      element: <RegisterForm />,
     },
   ]);
 

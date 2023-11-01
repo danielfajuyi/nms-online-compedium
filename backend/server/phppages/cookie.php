@@ -4,7 +4,7 @@ $d= strtotime("now");
 $datestaamp = date("y/M/d:h:m:sa",$d);
 $cookie_name = "userdata";
 $cookie_value = array(   array(
-    "name" => $username, "lastseen" => $datestaamp
+    "email" => $email, "lastseen" => $datestaamp
 ) );
 setcookie($cookie_name,$cookie_value, time()+ (86400*30), "/");
 

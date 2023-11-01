@@ -106,9 +106,19 @@ email:" ",
   axios.post(url,data)
   //handle response
    .then((Response) => {
-    alert(Response.data);
-    
-    window.location.href = ` http://localhost/login-system-main/verification.php?email=${inputs.email}`;
+    //alert(Response.data);
+    //strictly cnvertong response to string
+    let outcome = Response.data.toString();
+    outcome.toString();
+    alert(outcome);
+   JSON.stringify(outcome)
+  //if the all server authentications are sucsessfull redirect to  email verification page
+    if(outcome.includes("Successfully")){
+        window.location.href = ` http://localhost/login-system-main/verification.php?email=${inputs.email}`;
+
+  }else{
+    return ;
+   }
 
        })
         //handle server error 

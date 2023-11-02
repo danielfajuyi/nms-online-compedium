@@ -10,7 +10,6 @@ import {
   FaLock,
   FaTwitter,
 } from "react-icons/fa";
-import axios from "axios";
 
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useEffect } from "react";
@@ -23,10 +22,7 @@ const LoginSignup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [passwordsvg, setPasswordSvg] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [inputs, setInputs] = useState({
-    email:" ",
-    password:" "
-  });
+  const [inputs, setInputs] = useState({});
   const [message, setMessage] = useState("");
   const [modalTxt, setModalTxt] = useState("");
   // For Signup
@@ -58,7 +54,7 @@ const LoginSignup = () => {
     setIsActive((current) => !current);
     // const { isFetching } = useSelector((state) => state.user);
   };
-const handleforget = ()=> window.location.href = "http://localhost/login-system-main/recover_psw.php";
+
   const handleChange = (e) => {
     setInputs((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
@@ -67,21 +63,6 @@ const handleforget = ()=> window.location.href = "http://localhost/login-system-
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const url = "http://localhost/login.php";
-  const  data = new FormData();
-    data.append("email", inputs.email);
-    data.append("password", inputs.password);
-    axios.post(url,data)
-    .then((Response) =>{
-      console.log(Response.status)
-      alert(Response.data)
-    })
-.catch((error)=>{
-  console.error(error, "could  not connect to  server")
-  alert('error has ocured ', error)
-});
-
-
   };
 
   useEffect(() => {
@@ -183,7 +164,7 @@ const handleforget = ()=> window.location.href = "http://localhost/login-system-
                           <p className="back-link"> Remember me</p>
                         </label>
 
-                        <a className="back-link" onClick={handleforget}>Forget your password?</a>
+                        <a className="back-link">Forget your password?</a>
                       </div>
                     </div>
                   </div>

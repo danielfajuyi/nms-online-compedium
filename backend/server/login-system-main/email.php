@@ -63,8 +63,11 @@ require "Mail/phpmailer/PHPMailerAutoload.php";
                                 
                                 
                             }else{  ##if email is sent register the user
- mysqli_query($conn,$query);
- echo "Register Successfully, Authenntication code was  sent to " . $email . 'PLEASE!! check your email';
+
+                                mysqli_query($conn,$query);
+                                
+                                
+                             echo "Register Successfully, Authenntication code was  sent to " . $email . 'PLEASE!! check your email';
                                 
                                   
                             }

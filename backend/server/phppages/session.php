@@ -1,6 +1,8 @@
 <?php
 #creating sessions for candidates
 session_start();
-$_SESSION['email']= $_POST['email'];
+$_SESSION['username'] = $user;
+$_SESSION['email']= $email;
+$_SESSION['image'] = $image
 
 ?>

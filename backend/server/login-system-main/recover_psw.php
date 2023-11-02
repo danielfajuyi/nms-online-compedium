@@ -81,7 +81,7 @@
                 alert("<?php  echo "Sorry, no emails exists "?>");
             </script>
             <?php
-        }else if($fetch["verification"] == 0){
+        }else if($fetch["status"] == 0){
             ?>
                <script>
                    alert("Sorry, your account must verify first, before you recover your password !");
@@ -101,16 +101,16 @@
 
             $mail->isSMTP();
             $mail->Host='smtp.gmail.com';
-            $mail->Port=465;
+            $mail->Port=587;
             $mail->SMTPAuth=true;
-            $mail->SMTPSecure='ssl';
+            $mail->SMTPSecure='tls';
 
             // h-hotel account
-            $mail->Username='nmsonlinecompedium@gmail.com';
-            $mail->Password='xulr wmmf wfba ofki';
+            $mail->Username='sirabdull70@gmial.com';
+            $mail->Password='qalv kuyh szwv htxf';
 
             // send by h-hotel email
-            $mail->setFrom('nmsonlinecompedium@gmail.com', 'Password Reset');
+            $mail->setFrom('sirabdull70@gmail.com', 'Password Reset');
             // get email from input
             $mail->addAddress($_POST["email"]);
             //$mail->addReplyTo('lamkaizhe16@gmail.com');
@@ -118,13 +118,13 @@
             // HTML body
             $mail->isHTML(true);
             $mail->Subject="Recover your password";
-            $mail->Body="<b>Dear candidate</b>
+            $mail->Body="<b>Dear User</b>
             <h3>We received a request to reset your password.</h3>
             <p>Kindly click the below link to reset your password</p>
-            http://localhost/Login-System-main/reset_psw.php
+            http://localhost/login-System/Login-System-main/reset_psw.php
             <br><br>
             <p>With regrads,</p>
-            ";
+            <b>Programming with Lam</b>";
 
             if(!$mail->send()){
                 ?>

@@ -10,6 +10,7 @@ import {
   FaLock,
   FaTwitter,
 } from "react-icons/fa";
+import axios from "axios";
 
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useEffect } from "react";
@@ -22,7 +23,10 @@ const LoginSignup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [passwordsvg, setPasswordSvg] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [inputs, setInputs] = useState({});
+  const [inputs, setInputs] = useState({
+    email:" ",
+    password:" "
+  });
   const [message, setMessage] = useState("");
   const [modalTxt, setModalTxt] = useState("");
   // For Signup
@@ -54,7 +58,7 @@ const LoginSignup = () => {
     setIsActive((current) => !current);
     // const { isFetching } = useSelector((state) => state.user);
   };
-
+const handleforget = ()=> window.location.href = "http://localhost/login-system-main/recover_psw.php";
   const handleChange = (e) => {
     setInputs((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
@@ -63,6 +67,28 @@ const LoginSignup = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    const url = "http://localhost/login.php";
+  const  data = new FormData();
+    data.append("email", inputs.email);
+    data.append("password", inputs.password);
+    axios.post(url,data)
+    .then((Response) =>{
+      console.log(Response.status)
+      alert(Response.data)
+    const res = JSON.stringify(Response.data)
+    if(res.includes('verify')){
+      setTimeout(()=>{window.location.href= `http://localhost/login-system-main/verification.php?email=${inputs.email}`},700)
+    }
+   else if(res.includes('subscribe')){
+      setTimeout(()=>{window.location.href= `http://localhost/phppages/subscription/sub.php?email=${inputs.email}`},700)
+    }
+    })
+.catch((error)=>{
+  console.error(error, "could  not connect to  server")
+  alert('error has ocured ', error)
+});
+
+
   };
 
   useEffect(() => {
@@ -127,7 +153,7 @@ const LoginSignup = () => {
                         required
                         spellCheck={false}
                         autoComplete="off"
-                      />
+                        />
                       <label htmlFor="password">Password</label>
                     </div>
 
@@ -164,7 +190,7 @@ const LoginSignup = () => {
                           <p className="back-link"> Remember me</p>
                         </label>
 
-                        <a className="back-link">Forget your password?</a>
+                        <a className="back-link" onClick={handleforget}>Forget your password?</a>
                       </div>
                     </div>
                   </div>

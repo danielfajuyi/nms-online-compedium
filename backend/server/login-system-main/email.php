@@ -59,7 +59,7 @@ require "Mail/phpmailer/PHPMailerAutoload.php";
                             if(!$mail->send()){
                                 
                                     #if email was not sent 
-                      echo "Register Failed, Authentication email could not be sent.. TRY using a different network connecction provider. Go back and try again";
+                      echo "Register Failed, Authentication email could not be sent.. check your connection or email and try  again.";
                                 
                                 
                             }else{  ##if email is sent register the user

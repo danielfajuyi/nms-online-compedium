@@ -90,7 +90,7 @@ echo 'verification code sent to '. $email;
             ?>
            <script>
                alert("Invalid OTP code");
-            
+                    
 
            </script>
            <?php

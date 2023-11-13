@@ -77,14 +77,14 @@ include('connect/connection.php');
         $token = $_SESSION['token'];
         $Email = $_SESSION['email'];
 
-        $hash = password_hash( $psw , PASSWORD_DEFAULT );
+       
 
         $sql = mysqli_query($connect, "SELECT * FROM login WHERE email='$Email'");
         $query = mysqli_num_rows($sql);
   	    $fetch = mysqli_fetch_assoc($sql);
 
         if($Email){
-            $new_pass = $hash;
+            $new_pass = $psw;
             mysqli_query($connect, "UPDATE login SET password='$new_pass' WHERE email='$Email'");
             ?>
             <script>

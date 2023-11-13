@@ -10,8 +10,8 @@ header('Access-Control-Allow-Headers: *');
     $email = $_POST['email'];
     $fullname =$_POST['firstName'].' '.$_POST['lastName'];
     $mobile =$_POST['mobile'];
-    $times_stamp = strtotime("now");
-    $otp = uniqid('NMScomp');
+    $times_stamp = date('y/m/d/h-M-s');
+    $otp = rand(100000,999999);
 
 
    $query = " INSERT INTO `registerd_candidates`( `fullname`,  `password`, `mobile`, `email`, `reg_date`, `subscribed`, `subscription_type`,`verification`, `verification_code`) VALUES ('$fullname','$password','$mobile','$email','$times_stamp','false','NULL', 'false', '$otp')";
@@ -19,12 +19,11 @@ header('Access-Control-Allow-Headers: *');
 ##AUTHERNTICATION
     $authenticate_email =  "SELECT * FROM `registerd_candidates` WHERE `email` = '$email'";
     $authenticate_mobile =  "SELECT * FROM `registerd_candidates` WHERE `mobile` = '$mobile'";
-    $authenticate_user =  "SELECT * FROM `registerd_candidates` WHERE `user` = '$user'";
-
+   
     
     $execute_authenticate_email= mysqli_query($conn,$authenticate_email);
     $execute_authenticate_mobile= mysqli_query($conn,$authenticate_mobile);
-    $execute_authenticate_user= mysqli_query($conn,$authenticate_user);
+   
     
     if(mysqli_num_rows($execute_authenticate_mobile) > 0 and mysqli_num_rows($execute_authenticate_email) > 0){
         print " mobile number and email address already exist. email:";
@@ -39,10 +38,7 @@ header('Access-Control-Allow-Headers: *');
         echo "mobile number already exist";
 
     }
-    else if(mysqli_num_rows($execute_authenticate_user) > 0){
-        echo "username already taken";
-
-    }
+    
    else{
    
 require "login-system-main/email.php";

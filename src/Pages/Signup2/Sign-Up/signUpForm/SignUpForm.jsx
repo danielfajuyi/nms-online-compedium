@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { redirect, useNavigate } from "react-router-dom";
+import { json, redirect, useNavigate } from "react-router-dom";
 import { AlertModal } from "./Modal";
 import { ToastContainer } from "react-toastify";
 import { FaSun, FaMoon, FaTimes, FaHome } from "react-icons/fa";
@@ -21,10 +21,17 @@ password:" ",
 email:" ",
 
 });
+
   const [isChecked, setIschecked] = useState(false);
   const [isError, setIsError] = useState(false);
   const [message, setMessage] = useState("");
-
+  let setdisabled;
+  if(!isError){
+     setdisabled = 'true'
+  }
+  else{
+    setdisabled = 'false'
+  }
   const [progress, setProgress] = useState(0);
 
   let navigate = useNavigate();
@@ -101,15 +108,25 @@ email:" ",
  data.append('password',inputs.password);
  data.append('email',inputs.email);
  data.append('mobile',inputs.mobileNo);
- alert(`An authentication code will be sent to ${inputs.email}  `) ;
+ const call = window.confirm(`An authentication code will be sent to ${inputs.email}  `)
+ if(!call){
+  return;
+ }
 //send data to PHP seever to handle registration
   axios.post(url,data)
   //handle response
    .then((Response) => {
     alert(Response.data);
-    
-    window.location.href = ` http://localhost/login-system-main/verification.php?email=${inputs.email}`;
+    const res = JSON.stringify(Response.data);
+   const response= res.toString()
+    if(response.includes('Successfully')){
+      window.location.href = ` http://localhost/login-system-main/verification.php?email=${inputs.email}`;
 
+    }
+    else{
+      return;
+    }
+  
        })
         //handle server error 
     .catch((error)=>{
@@ -523,8 +540,9 @@ email:" ",
                           }}
                           onClick={() => {
                             isError && setModalTxt("sign-up-Err");
+                            
                           }}
-                          type="submit"
+                         
                         >
                           Continue
                         </button>

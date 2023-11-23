@@ -1,25 +1,45 @@
 <?php
+##require "./phppages/session.php";
+ if(isset($_POST['remember'])){
+    require_once "./phppages/cookie.php";
+}
+if(isset($_COOKIE['userdata'])){
+    $_POST['email'] = $_COOKIE[$cookie_value->email];
+}
 require "./phppages/dbconnect.php";
 require "./phppages/session.php";
 
 
 header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Headers: *');
 
-  
+   
     $password = $_POST['password'];
     $email = $_POST['email'];
-    $times_stamp = date("y/m/d:h:m:l:sa");
+   $_SESSION['email'] = $email;
+   $email = $_SESSION['email'];
+  
+    $auth =  "SELECT * FROM `registerd_candidates` WHERE `email` = '$email' AND `password` = '$password'";
+    $exeauth= mysqli_query($conn,$auth);
+    $row = mysqli_fetch_assoc($exeauth);
+   
+    if(mysqli_num_rows($exeauth)<=0){
+        echo' Invalid credentials!!';
 
-   $query = " SELECT * from `registerd_candidates` WHERE `email` = '$email' AND `password` = '$password'";
-   $result = mysqli_query($conn,$query);
-   $row = mysqli_num_rows($result);
-   if($row >0){
-echo 'login sucessfull';
-   }
-
+    }
+   else if($row['verification'] != 1){
+        echo 'please verify your email before attempting to login';
+    }
+else if ($row['subscribed'] != 1){
+    echo' please subscribe to a plan to start practicing';
+}
+   
     
     else{
-     echo 'invalid email or pasword';
+        
+      echo  $_SESSION['login'] = true;
+       echo' welcome back comrade!'.print_r($_SESSION);
+       
+    
     }
-    ?>
+    
+?>                

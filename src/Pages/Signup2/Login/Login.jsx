@@ -75,6 +75,16 @@ const handleforget = ()=> window.location.href = "http://localhost/login-system-
     .then((Response) =>{
       console.log(Response.status)
       alert(Response.data)
+    const res = JSON.stringify(Response.data)
+    if(res.includes('verify')){
+      setTimeout(()=>{window.location.href= `http://localhost/login-system-main/verification.php?email=${inputs.email}`},700)
+    }
+   else if(res.includes('subscribe')){
+      setTimeout(()=>{window.location.href= `http://localhost/phppages/subscription/sub.php?email=${inputs.email}`},700)
+    }
+    else if(res.includes('welcome')){
+  setTimeout(()=>{window.location.href= `http://localhost/phppages/dashboard/includes/auth.php?email=${inputs.email}`},700)
+    }
     })
 .catch((error)=>{
   console.error(error, "could  not connect to  server")
@@ -146,7 +156,7 @@ const handleforget = ()=> window.location.href = "http://localhost/login-system-
                         required
                         spellCheck={false}
                         autoComplete="off"
-                      />
+                        />
                       <label htmlFor="password">Password</label>
                     </div>
 

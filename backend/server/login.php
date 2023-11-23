@@ -1,4 +1,5 @@
 <?php
+##require "./phppages/session.php";
  if(isset($_POST['remember'])){
     require_once "./phppages/cookie.php";
 }
@@ -14,7 +15,8 @@ header('Access-Control-Allow-Origin: *');
    
     $password = $_POST['password'];
     $email = $_POST['email'];
-   
+   $_SESSION['email'] = $email;
+   $email = $_SESSION['email'];
   
     $auth =  "SELECT * FROM `registerd_candidates` WHERE `email` = '$email' AND `password` = '$password'";
     $exeauth= mysqli_query($conn,$auth);
@@ -33,7 +35,11 @@ else if ($row['subscribed'] != 1){
    
     
     else{
-       echo' welcome back comrade!';
+        
+      echo  $_SESSION['login'] = true;
+       echo' welcome back comrade!'.print_r($_SESSION);
+       
+    
     }
     
 ?>                

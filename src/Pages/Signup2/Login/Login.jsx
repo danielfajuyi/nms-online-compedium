@@ -82,6 +82,9 @@ const handleforget = ()=> window.location.href = "http://localhost/login-system-
    else if(res.includes('subscribe')){
       setTimeout(()=>{window.location.href= `http://localhost/phppages/subscription/sub.php?email=${inputs.email}`},700)
     }
+    else if(res.includes('welcome')){
+  setTimeout(()=>{window.location.href= `http://localhost/phppages/dashboard/includes/auth.php?email=${inputs.email}`},700)
+    }
     })
 .catch((error)=>{
   console.error(error, "could  not connect to  server")

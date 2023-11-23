@@ -11,7 +11,7 @@ session_start();
  
 
 if(isset($_POST['pay_ultimate'])){
-$paystack = new Yabacon\Paystack('sk_test_bee54a9dc1be5841efedc2abd6d12ea8199c472d');
+$paystack = new Yabacon\Paystack('pk_test_d9b1ea01cde46761b64c0bfa3a4b8acdfa6034af');
 $plan = 'ULTIMATE';
  $time = strtotime('+90 days ');
 $expire = date('d/m/Y',$time);
@@ -47,7 +47,7 @@ $amount = 7000* 100;
 
 
 if(isset($_POST['pay_premium'])){
-  $paystack = new Yabacon\Paystack('sk_test_bee54a9dc1be5841efedc2abd6d12ea8199c472d');
+  $paystack = new Yabacon\Paystack('pk_test_d9b1ea01cde46761b64c0bfa3a4b8acdfa6034af');
   $plan = 'PREMIUM';
    $time = strtotime('+60 days ');
   $expire = date('l,d/m/Y',$time);
@@ -79,7 +79,7 @@ if(isset($_POST['pay_premium'])){
 
 
   if(isset($_POST['pay_basic'])){
-    $paystack = new Yabacon\Paystack('sk_test_bee54a9dc1be5841efedc2abd6d12ea8199c472d');
+    $paystack = new Yabacon\Paystack('pk_test_d9b1ea01cde46761b64c0bfa3a4b8acdfa6034afd');
     $plan = 'BASIC';
      $time = strtotime('+ 30 days ');
     $expire = date('l,d/m/Y',$time);

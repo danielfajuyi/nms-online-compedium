@@ -1,11 +1,22 @@
 <?php
+/*
+important file serves as the API for loging useres 
+into the application....
+
+--THIS IS WHERE LOGIN  REQUEST ARE HANDLED------
+
+*/
+
+
+
 ##require "./phppages/session.php";
  if(isset($_POST['remember'])){
     require_once "./phppages/cookie.php";
+    if(isset($_COOKIE['userdata'])){
+        $_POST['email'] = $_COOKIE[$cookie_value->email];
+    }
 }
-if(isset($_COOKIE['userdata'])){
-    $_POST['email'] = $_COOKIE[$cookie_value->email];
-}
+
 require "./phppages/dbconnect.php";
 require "./phppages/session.php";
 
@@ -37,7 +48,7 @@ else if ($row['subscribed'] != 1){
     else{
         
       echo  $_SESSION['login'] = true;
-       echo' welcome back comrade!'.print_r($_SESSION);
+       echo' welcome back comrade!  ';
        
     
     }

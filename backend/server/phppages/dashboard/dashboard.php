@@ -2,12 +2,10 @@
 include  'includes/candclass.php';
 //namespace Candidate;
 session_start();
-#echo $_SESSION['email'];
 
-if(!isset($_SESSION['login'])){ 
-    echo 'please login before you can access dashboard';
-    die();
-}
+// this should be included on all pages which requires AUTH
+//or you can also include auth.php
+require 'includes/authenticate.php';
 require '../dbconnect.php';
 
 require_once 'includes/header.html';
@@ -144,7 +142,7 @@ $getstat = $user->getstat($userEmail);
           fullname : <kbd><?php echo  $user->position(1,'user');?></kbd>
             </h6> 
             <h6>
-          Ranking : <kbd><?php echo  $user->ranking($user->position(1,'user'));?></kbd>
+          Ranking : <kbd><?php echo  $user->ranking($user->position(1,'email'));?></kbd>
             </h6> 
           
           
@@ -162,11 +160,11 @@ $getstat = $user->getstat($userEmail);
           fullname : <kbd><?php echo $user->position(2,'user')?> </kbd>
             </h6> 
             <h6>
-          Ranking : <kbd><?php echo  $user->ranking($user->position(2,'user'));?></kbd>
+          Ranking : <kbd><?php echo  $user->ranking($user->position(2,'email'));?></kbd>
             </h6> 
           
           
-          <h6> Rating :<?php echo  $user->rating($user->position(2,'email'));?>  </kbd> </h6> 
+          <h6 > Rating : <kbd><?php echo  $user->rating($user->position(2,'email'));?>  </kbd> </h6> 
           </div> 
             
     </div>
@@ -191,4 +189,17 @@ $getstat = $user->getstat($userEmail);
 
 
 </body>
+
+<?php
+
+
+if($userEmail == $user->position(1,'email')){
+
+$mail= new PHPMailer;
+
+
+
+
+}
+?>
 </html>

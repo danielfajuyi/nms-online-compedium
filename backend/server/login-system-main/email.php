@@ -2,29 +2,19 @@
 
 
 <?php
+/*
+*THIS FILE MUST BE INCLUDED IN THE REGISTRATION FILE... 
+*IT SENDS ONE TIME PASSWORDS TO VERIFY USER EMAIL BEFORE REGISTRATION
+*IT VARIABLE DEPENDS ON 
+*@file fetch.php
 
+
+
+*/
 
 
 require "Mail/phpmailer/PHPMailerAutoload.php";
-                    $mail = new PHPMailer;
-                    
-    
-                    $mail->isSMTP();
-                    $mail->Host='smtp.gmail.com';
-                    $mail->Port=465;
-                    $mail->SMTPAuth=true;
-                    $mail->SMTPSecure='ssl';
-                   
-    
-                    $mail->Username='nmsonlinecompedium@gmail.com';
-                    $mail->Password='xulr wmmf wfba ofki';
-    
-                    $mail->setFrom('nmsonlinecompedium@gmail.com', 'NMS online compedium');
-                    $mail->addAddress($email);
-    
-                    $mail->isHTML(true);
-                    $mail->Subject="Your verification code";
-                    $mail->Body="<p>Dear ". $fullname .", </p> <h3>Your verification code is  <span style='color:blue;text-decoration:underline;font-family:sans serif tahoma;font-size:20px;letter-spacing:3px;'>$otp </span><br>
+                  "<p>Dear ". $fullname .", </p> <h3>Your verification code is  <span style='color:blue;text-decoration:underline;font-family:sans serif tahoma;font-size:20px;letter-spacing:3px;'>$otp </span><br>
                     <div style=' 
                     height:400px;
                     font-family:sans serif tahoma;
@@ -33,9 +23,9 @@ require "Mail/phpmailer/PHPMailerAutoload.php";
                     word-spacing:3px;
                     text-align:justify;
                     padding:20px;
-                    border:2px ridge green;
-                    border-radius:10px;
-                    background:black;
+                    border:1px ridge white;
+                
+                    background:transparent;
                     margin-top: 50px;
                     color:white;'>
                     <img style='  width: 30px;

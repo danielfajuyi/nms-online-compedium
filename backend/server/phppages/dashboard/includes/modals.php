@@ -1,4 +1,18 @@
+
+
+<?php 
+
+include 'candclass.php'
+
+
+
+
+
+?>
+
+
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -25,7 +39,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body bg-dark text-white">
-                    <form action="" method="post">
+
+
+                    <form action="../practice/practice.php" method="post">
                         <img src="nms-logo.webp" class=" mb-2 float-end w-2 " style="width: 60px; " alt="logo">
                         <div class="mb-3">
                             <label for="subject" class="form-label">
@@ -35,7 +51,7 @@
                                 <option selected value="english">English & verbal</option>
                                 <option value="calculation">Mathematics& Quantitative</option>
                                 <option value="General">General knowlede & current Affairs</option>
-                                <option value="random">Mixed</option>
+                                <option value="random">Random</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -128,7 +144,7 @@
                     <button type="button" class="btn mr-5 float-start btn-secondary"
                         data-bs-dismiss="modal">Close</button>
 
-                    <button type="submit" class="btn btn-primary">Start <i class="fa fa-paper-plane"
+                    <button type="submit"  class="btn btn-primary">start practice <i class="fa fa-paper-plane"
                             aria-hidden="true"></i></button>
                     </form>
                 </div>
@@ -142,12 +158,13 @@
         const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
 
     </script>
+<!-- full practice modal-->
 
     <!-- The Modal -->
     <div class="modal fade" id="full">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
-
+<form action="../practice/practicecustom.php" method="post">
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <h4 class="modal-title">full mock test</h4>
@@ -193,8 +210,9 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Start <i class="fa fa-send"
+                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal">start exam<i class="fa fa-send"
                             aria-hidden="true"></i></button>
+                            </form>
                 </div>
 
             </div>

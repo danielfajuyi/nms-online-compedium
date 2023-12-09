@@ -1,10 +1,23 @@
 <?php
 namespace Candidates;
+/*
+
+ERROR REPORTING .. 
+THIS SHOULD ONLY BE SET TO 0 ON PRODUCTION ;
+TO USE CLASS PLEASE COMMENT OUT THE LINE
+*/
+error_reporting(0);
+/*
+ KEEP THE VALUE ABOVE SET TO 0 👆👆 . 
+
+
+*/
+
 class Candidate {
-
+    
     /*------------------------------¬
-  THIS CLASS CONTAINS METHODS FOR HANDLING CANDIDATES PRACTICE DETAILS AND ALSO AUTHENTICATING CANDIDATES 😂👍
-
+  THIS CLASS CONTAINS METHODS FOR HANDLING CANDIDATES PRACTICE DETAILS AND ALSO AUTHENTICATING CANDIDATES ✔👍
+IT ALSO HANDLES CANDIDATES SETTING AND UPDATING STATS, LEADERBOARDS SYSTEM,RANKING AND RATING CANDIDATES
 INFO::::::: The candidates class will get all instances and statistics of the sesssion user 
 
 
@@ -179,7 +192,7 @@ mysqli_query($this->getDb(),$query);
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
  
     <h4><strong>welcome!</strong></h4> <br> seems it your  First time login..check compedium guide if you need  help
-    <button type="button" class="btn-danger pt-2 btn-block rounded" data-bs-dismiss="alert" aria-label="Close">close</button>
+  
  </div>
 </div>
  <?php
@@ -198,7 +211,7 @@ else{
 
 
 public function sort(){
-    $query = " SELECT * FROM `stats` ORDER BY `xp` ASC  ";
+    $query = " SELECT * FROM `stats` ORDER BY `xp` DESC  ";
  $result = mysqli_query($this->getDb(),$query);
 return $result;
 }
@@ -228,7 +241,7 @@ $data[] = $row;
  
    }
 foreach($data as $index => $user){
-    if($user['email'] == $who_to_rank or $user['user'] == $who_to_rank){
+    if($user['email'] == $who_to_rank ){
 
 $ranking = $index + 1;
         }
@@ -247,7 +260,7 @@ THE BELLOW METHOD 👇👇👇 WILL HANDLE RATING  OF THE  USERS
 
  ALGORITHM :: -> first we try to get the user's RATING FIELD from the  stats table
               ->THEN WE MINUS 1 FROM THE USER'S RATING TO ENSURE RATING IS NOT MORE
-               THAN FIVE AS WE CAN ONLY DISPLAY MAX OF STARTS;
+               THAN FIVE AS WE CAN ONLY DISPLAY MAX OF STARS;
               ->THEN we loop through the amount of rating the person has 
               ->FINALY WE CREATE A STAR FOR EACH LOOP
 
@@ -286,11 +299,13 @@ else{
 
 
 
-public function set_stat($stat,$value){
+public function setstat($stat,$value){
 
     if ($stat == 'xp'){
         $former = $this->displaystat('xp');
- $update  =  $former + $value;
+
+ $newxp = $value * 1.5;
+ $update = $former +$newxp ;
  mysqli_query($this->getDb(),"UPDATE `stats` SET `xp` = '{$update}' WHERE `email` = '{$this->getEmail()}'");
     }
 
@@ -305,18 +320,13 @@ public function set_stat($stat,$value){
         mysqli_query($this->getDb(),"UPDATE `stats` SET `progress` = '{$update}'  WHERE `email` = '{$this->getEmail()}'");
            }
 
-
-
-
   if ($stat == 'rating'){
-      $update  = $this->dispalystat('xp') /1000;
+      $update  = $this->displaystat('xp') /1000;
   mysqli_query($this->getDb(),"UPDATE `stats` SET `{$stat}` = '{$update}' WHERE `email` = '{$this->getEmail()}'");
                }
-
-
      if ($stat == 'last_score'){
           $update  =  $value;
-        mysqli_query($this->getDb(),"UPDATE `stats` SET '{$stat}' = '{$update}' WHERE `email` = '{$this->getEmail()}'");
+        mysqli_query($this->getDb(),"UPDATE `stats` SET `{$stat}` = '{$update}' WHERE `email` = '{$this->getEmail()}'");
                  }
 
 
@@ -343,8 +353,13 @@ if($stat == 'overall_score'){
 
 }
 
+/*
 
+------------------GETTING USER'S POSITION WITH A PARTICULAR STATS FIELD-------------
 
+this method will display the users position on a ranked table which is ranked by the specified field you've provided
+
+*/
 
 
 
@@ -355,7 +370,6 @@ public function position($pos,$field){
   $pos = $pos-1;
     
     while($row = mysqli_fetch_assoc($result)){
-    #$total = count($row);
     $data[] = $row;
      
        }
@@ -374,6 +388,62 @@ if($index == $pos){
 
     }
 
+}
+
+
+/*
+
+
+
+
+
+*/
+
+class exam extends candidate{
+  public $year ;
+  public $subject;
+  public $difficulty;
+
+public function fetchexam($year,$subject){
+ $this->getDb();
+$result = mysqli_query($this->getDB()," SELECT *FROM questions WHERE  `subject` = '{$subject}' AND `year` = '{$year}'" );
+$data = array();
+    $row = mysqli_fetch_assoc($result);
+   // shuffle($row);
+while($row = mysqli_fetch_assoc($result)){
+$data[] = $row;
+}
+shuffle($data);
+foreach($data as $index => $question){
+$index + 1 ;
+?>
+<div class="container-lg">
+    <div class="row  question justify-content-center align-items-center g-2">
+    <form action="" method="post">
+        <div class="col-4"><?php echo $row['question_text'] ?></div>
+        <div class="col">Column</div>
+        <div class="col">Column</div>
+        <div class="row ${1| ,row-cols-2,row-cols-3, auto,justify-content-md-center,|}">
+            <?php
+            for($i =0;$i<=4; $i++){
+                $option = $row["option_$i"];
+                $optionid = $row['quetion_id']."_option_$i" ;
+     ?>
+<input type="radio" class="form-control" name="<?php echo $row['question_id']?>" value=" <?php echo  $i?>" id= " <?php echo $optionid ?>"> <label for="<?php echo $optionid?>"><?php echo  $option?></label>
+<?php
+            }
+          
+?>
+  <button type="submit" class=" btn btn-success">finish</button>
+            </form>
+        </div>
+    </div>
+</div>
+<?php
+
+}
+
+}
 }
 
 ?>

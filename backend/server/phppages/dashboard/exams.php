@@ -1,7 +1,7 @@
 <?php 
 session_start();
+require 'includes/authenticate.php';
 require_once 'includes/header_exam.html';
-
 
 ?>
 <!DOCTYPE html>
@@ -93,7 +93,7 @@ require_once 'includes/header_exam.html';
     
 
 
-<?php require 'includes/modals.html';?>
+<?php require 'includes/modals.php';?>
     
     <div class="col ml-2 top bg-success rounded ">
     <h1> <i class="fa fa-bullseye" aria-hidden="true"></i></h1> 

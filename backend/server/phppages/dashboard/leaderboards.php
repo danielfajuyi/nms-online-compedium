@@ -1,15 +1,18 @@
 <?php
+
 session_start();
+require 'includes/authenticate.php';
 include 'includes/candclass.php';
 $leader = new Candidates\candidate();
- 
+ error_reporting(0);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="icon" href="nms-logo.webp" type="image/webp">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>leaderboards</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -52,17 +55,17 @@ NOTE!! your position on this table is Highlighted.
 
 for instance fetching the top 100 candidates
 */
-$y = 1  ;
-$x = 100;
-while($y < $x)  {
+$y = 1 ;
+while($y <= 100)  {
 
 ?>
                  <tbody class="table-group-divider">
                 <tr class= <?php echo ($leader->position($y,'email') == $leader->getEmail())? "table-primary" : " " ?> >
-                    <td scope="row"><?php  echo $leader->ranking($leader->position($y,'user'))?> </td>
+                    <td scope="row"><?php  echo $leader->ranking($leader->position($y,'email'))?> </td>
                     <td> <?php echo $leader->position($y,'user')?><i class="fa fa-user" aria-hidden="true"></i></td>
                     <td><?php echo $leader->position($y,'email')?> <i class="fa fa-envelope" aria-hidden="true"></i></td>
                     <td><?php echo $leader->position($y,'xp')?> <i class="fa fa-trophy" aria-hidden="true"></i></td>
+                    <td><?php echo $leader->rating($leader->position($y,'email'))?> </td>
                 </tr>
             
             </tbody>
@@ -71,10 +74,11 @@ while($y < $x)  {
             $y++;
         
         }
+
             ?>
             <tfoot>
                 
-            </tfoot>
+            </tfoot>0-
     </table>
 </div>
 

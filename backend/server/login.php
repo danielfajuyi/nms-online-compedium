@@ -1,30 +1,56 @@
 <?php
+/*
+important file serves as the API for loging useres 
+into the application....
+
+--THIS IS WHERE LOGIN  REQUEST ARE HANDLED------
+
+*/
+
+
+
+##require "./phppages/session.php";
+ if(isset($_POST['remember'])){
+    require_once "./phppages/cookie.php";
+    if(isset($_COOKIE['userdata'])){
+        $_POST['email'] = $_COOKIE[$cookie_value->email];
+    }
+}
+
 require "./phppages/dbconnect.php";
 require "./phppages/session.php";
 
 
 header('Access-Control-Allow-Origin: *');
 
-    $user = $_POST['user'];
+   
     $password = $_POST['password'];
     $email = $_POST['email'];
-    $fullname =$_POST['fullname'];
-    $mobile =$_POST['mobile'];
-    $times_stamp = date("y/m/d:h:m:l:sa");
-
-   $query = " INSERT INTO `registerd_candidates`( `fullname`, `user`, `password`, `mobile`, `email`, `reg_date`, `subscribed`, `subscription_type`) VALUES ('$fullname','$user','$password','$mobile','$email','$times_stamp','false',' NILL')";
-    ##$result=mysqli_query($conn,$query);
-    $auth =  "SELECT * FROM `registerd_candidates` WHERE `email` = '$email'";
+   $_SESSION['email'] = $email;
+   $email = $_SESSION['email'];
+  
+    $auth =  "SELECT * FROM `registerd_candidates` WHERE `email` = '$email' AND `password` = '$password'";
     $exeauth= mysqli_query($conn,$auth);
-    
-    if(mysqli_num_rows($exeauth) > 0){
-        echo "EMAIL ALREADY EXIST";
+    $row = mysqli_fetch_assoc($exeauth);
+   
+    if(mysqli_num_rows($exeauth)<=0){
+        echo' Invalid credentials!!';
+
     }
+   else if($row['verification'] != 1){
+        echo 'please verify your email before attempting to login';
+    }
+else if ($row['subscribed'] != 1){
+    echo' please subscribe to a plan to start practicing';
+}
+   
     
     else{
-        mysqli_query($conn,$query);
-            echo "registerd succesfullly";
         
+      echo  $_SESSION['login'] = true;
+       echo' welcome back comrade!  ';
+       
+    
     }
     
-?>
+?>                

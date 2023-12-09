@@ -1,11 +1,11 @@
 <?php
 # cookies
-$d= strtotime("now");
+$d= strtotime("today");
 $datestaamp = date("y/M/d:h:m:sa",$d);
 $cookie_name = "userdata";
-$cookie_value = array(   array(
-    "name" => $username, "lastseen" => $datestaamp
-) );
+$cookie_value = array(  
+    "email" => $email, "password" => $password
+ );
 setcookie($cookie_name,$cookie_value, time()+ (86400*30), "/");
 
 if(!isset($_COOKIE[$cookie_name])) {
